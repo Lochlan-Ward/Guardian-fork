@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import deakin.gopher.guardian.R
+import deakin.gopher.guardian.services.EmailPasswordAuthService
 import deakin.gopher.guardian.services.NavigationService
 
 class Homepage4nurse : AppCompatActivity() {
@@ -14,10 +15,9 @@ class Homepage4nurse : AppCompatActivity() {
         val settingsButton: Button = findViewById(R.id.settingsButton_nurse)
         val signOutButton: Button = findViewById(R.id.sighOutButton_nurse)
 
-        // patient list button - not yet implemented
-        // tasksButton.setOnClickListener{
-        //    NavigationService(this).onLaunchTasks()
-        // }
+        tasksButton.setOnClickListener {
+            NavigationService(this).onLaunchTasks()
+        }
 
         // settings button
         settingsButton.setOnClickListener {
@@ -26,7 +26,8 @@ class Homepage4nurse : AppCompatActivity() {
 
         // sign out button
         signOutButton.setOnClickListener {
-            NavigationService(this).onSignOut()
+            EmailPasswordAuthService.signOut(this)
+            finish()
         }
     }
 }
